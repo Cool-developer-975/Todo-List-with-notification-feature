@@ -1,0 +1,3 @@
+main-color : #0e1629
+sub-main : #f6f9ff
+accent : #538ff8

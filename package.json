@@ -1,0 +1,16 @@
+{
+  "name": "to-do-list-new-version",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile-tailwind":"npx tailwindcss -i ./src/input.css -o ./dist/style.css",
+    "run-tailwind":"npx tailwindcss -i ./src/input.css -o ./dist/style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
