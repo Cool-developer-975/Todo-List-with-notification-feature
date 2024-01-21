@@ -40,8 +40,8 @@ function returnTasksString(i,taskArray){
                         </p>
                     </div>
                     <div class="task-btn-frame">
-                        <button id = done-btn${i} class="bg-green-500 task-btn">${(taskArray[i].status === "completed")?"Undone":"Done"}</button>
-                        <button id = delete-btn${i} class="task-btn bg-red-500">Delete</button>
+                        <button id = done-btn${i} class="bg-green-500 task-btn hover:bg-green-400">${(taskArray[i].status === "completed")?"Undone":"Done"}</button>
+                        <button id = delete-btn${i} class="task-btn bg-red-500 hover:bg-red-400">Delete</button>
                     </div>
                 </div>`;
 }

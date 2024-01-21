@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To do list</title>
+    <link rel="icon" href="../images/icon.png">
     <link rel="stylesheet" href="style.css" type="text/css" />
     <script src="script.js" defer></script>
   </head>
@@ -18,12 +19,12 @@
         id="to-do-list-container"
       >
         <button
-          class="absolute right-2 top-1 rounded-md bg-[#538ff8] px-5 py-1 text-white"
+          class="absolute right-2 top-1 rounded-md bg-[#538ff8] px-5 py-1 text-white hover:bg-[#69a0ff]"
           id="bell-btn"
         >
           <div class="flex h-full w-full space-x-2">
             <img src="../images/bell.png" alt="bell-icon" class="bell-icon" />
-            <p>Enable notifications</p>
+            <p class="font-semibold">Enable notifications</p>
           </div>
         </button>
         <h2 class="font-sans text-2xl font-semibold">To Do List</h2>
@@ -43,7 +44,7 @@
         />
 
         <button
-          class="min-h-[2.5em] w-[90%] rounded-lg bg-[#538ff8] px-5 py-2 text-white hover:bg-[#619bff]"
+          class="min-h-[2.5em] w-[90%] rounded-lg font-semibold bg-[#538ff8] px-5 py-2 text-white hover:bg-[#619bff]"
           id="add-task-btn"
         >
           Add Task
