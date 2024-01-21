@@ -866,6 +866,18 @@ video {
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.font-\[system-ui\] {
+  font-family: system-ui;
+}
+
+.font-\[system-ui\2c sans-serif\] {
+  font-family: system-ui,sans-serif;
+}
+
+.font-\[monospace\] {
+  font-family: monospace;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
