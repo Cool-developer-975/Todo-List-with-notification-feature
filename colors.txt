@@ -1,3 +1,24 @@
 main-color : #0e1629
 sub-main : #f6f9ff
 accent : #538ff8
+
+
+
+<div class="tasks-design">
+                    <div class="task-container">
+                        <p>
+                            <span class="font-semibold text-lg">Task:</span>
+                            <p class="text-justify"></p>
+                        </p>
+                        <p>
+                            <span class="font-semibold text-lg">Date:</span><br>
+                        </p>
+                        <p>
+                            <span class="font-semibold text-lg">Time:</span> <br>
+                        </p>
+                    </div>
+                    <div class="task-btn-frame">
+                        <button id="done-btn" class="bg-green-500 task-btn">Done</button>
+                        <button id="delete-btn" class="task-btn bg-red-500">Delete</button>
+                    </div>
+                </div>

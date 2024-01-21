@@ -10,7 +10,25 @@
 </head>
 
 <body>
-    
+    <div class="min-h-screen w-full bg-[#0e1629] flex justify-center items-center py-10" id="main-container">
+
+        <div class="w-[90%] h-fit max-w-[700px] bg-[#f6f9ff] rounded-lg py-[2em] px-[1em] flex flex-col items-center space-y-10" id="to-do-list-container">
+            <button class="absolute top-1 right-2 bg-[#538ff8] text-white px-5 py-1 rounded-md" id="bell-btn">
+                <div class="w-full h-full flex space-x-2">
+                    <img src="../images/bell.png" alt="bell-icon" class="bell-icon">
+                    <p>Enable notifications</p>
+                </div>
+            </button>
+            <h2 class="font-semibold font-sans text-lg">To Do List</h2>
+            <input type="text" name="task" id="task" placeholder="Enter your task here." class="input-styles">
+            <input type="datetime-local" name="datetime" id="datetime" class="input-styles" min="">
+
+            <button class="w-[90%] min-h-[2.5em] bg-[#538ff8] text-white py-2 px-5 rounded-lg hover:bg-[#619bff]" id="add-task-btn">Add Task</button>
+
+            <div id="tasks-list" class="w-full flex flex-col items-center space-y-8 rounded-xl p-[1em]">
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
