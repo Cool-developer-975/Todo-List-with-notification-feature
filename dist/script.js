@@ -36,7 +36,7 @@ function returnTasksString(i,taskArray){
                         </p>
                         <p>
                             <span class="font-semibold text-lg">Time:</span> <br>
-                            ${taskArray[i].hour} : ${taskArray[i].minutes} : ${taskArray[i].seconds}
+                            ${taskArray[i].hour} : ${taskArray[i].minutes} : ${taskArray[i].seconds} ${taskArray[i].amPm}
                         </p>
                     </div>
                     <div class="task-btn-frame">
@@ -68,11 +68,14 @@ const deleteBtnFunc = (e)=>{
     let taskId =  Number(e.target.parentNode.parentNode.getAttribute("id"));
     tasks.splice(taskId,1);
     console.log(tasks);
-    document.getElementById(`${taskId}`).remove();
-    addEventListenersToElements(tasks.length,false);
-    renderTasks(tasks);
-    addEventListenersToElements(tasks.length - 1, true);
-    localStorage.setItem("tasks",JSON.stringify(tasks));
+    document.getElementById(`${taskId}`).classList.add("animate-fade-out");
+    setTimeout(()=>{
+        document.getElementById(`${taskId}`).remove();
+        addEventListenersToElements(tasks.length,false);
+        renderTasks(tasks);
+        addEventListenersToElements(tasks.length - 1, true);
+        localStorage.setItem("tasks",JSON.stringify(tasks));
+    },1200);
 };
 
 
@@ -128,6 +131,16 @@ function renderTasks(taskArray){
 function renderTask(i,taskArray){
     let docfrag = new DocumentFragment();
     docfrag.append(returnFragment(returnTasksString(i,taskArray)));
+    if(docfrag.firstChild){
+        let el = docfrag.firstChild;
+        el.classList.add("animate-fade-in");
+        setTimeout(()=>{
+            el.classList.remove("animate-fade-in");
+        },1100);
+    }
+    else{
+        console.log("No first child");
+    }
     taskList.append(docfrag);
 }
 
@@ -141,7 +154,7 @@ taskBtn.addEventListener("click",()=>{
         let date = datetime.getDate().toString().padStart(2,"0");
         let h = datetime.getHours();
         let hour = ((h) % 12 || 12).toString().padStart(2,"0");
-        let amPm = (h < 12)?"Am":"Pm";
+        let amPm = (h < 12)?"am":"pm";
         let minutes = (datetime.getMinutes()).toString().padStart(2,"0");
         let seconds = (datetime.getSeconds()).toString().padStart(2,"0");
         let taskObj = {
