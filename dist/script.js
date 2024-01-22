@@ -9,15 +9,27 @@ let tasks = localStorage.getItem("tasks");
 let notificationPermission = false;
 
 
-function createNotification(datetime,task){
-    if(Notification.permission === "granted"){
-        console.log("Creating notification");
-        setTimeout(()=>{
-            new Notification("Todo List",{
-                body:`${task}`,
-                icon:"../images/icon.png"
-            });
-        },(datetime - new Date()));
+function createNotification(task){
+    let time = new Date(task['timing']) - new Date();
+    console.log(time);
+    if(task['status'] === ""){
+        if(time < Number.MAX_SAFE_INTEGER){
+            if(Notification.permission === "granted"){
+                console.log("Creating notification");
+                setTimeout(()=>{
+                    new Notification("Todo List",{
+                        body:`${task['task']}\nStatus : ${(time > 0)?'pending':'overdue'}\nDate: ${task['date']}-${task['month']}-${task['year']}\nTime : ${task['hour']} : ${task['minutes']} ${task['amPm']}`,
+                        icon:"../images/icon.png"
+                    });
+                },time);
+            }
+            else{
+                alert("Cannot create notifications since the notification permission is denied, to get notifications please grant notification permission.")
+            }
+        }
+        else{
+            alert("Cannot create notification, please select a date closer to current date");
+        }
     }
 }
 
@@ -36,7 +48,7 @@ function returnTasksString(i,taskArray){
                         </p>
                         <p>
                             <span class="font-semibold text-lg">Time:</span> <br>
-                            ${taskArray[i].hour} : ${taskArray[i].minutes} : ${taskArray[i].seconds} ${taskArray[i].amPm}
+                            ${taskArray[i].hour} : ${taskArray[i].minutes} ${taskArray[i].amPm}
                         </p>
                     </div>
                     <div class="task-btn-frame">
@@ -61,6 +73,7 @@ const doneBtnFunc = (e)=>{
         tasks[idx].status = "completed";
     }
     parent.classList.toggle("completed");
+    localStorage.setItem("tasks",JSON.stringify(tasks));
 };
 
 const deleteBtnFunc = (e)=>{
@@ -156,7 +169,6 @@ taskBtn.addEventListener("click",()=>{
         let hour = ((h) % 12 || 12).toString().padStart(2,"0");
         let amPm = (h < 12)?"am":"pm";
         let minutes = (datetime.getMinutes()).toString().padStart(2,"0");
-        let seconds = (datetime.getSeconds()).toString().padStart(2,"0");
         let taskObj = {
             "task" : task,
             "year" : year,
@@ -165,8 +177,8 @@ taskBtn.addEventListener("click",()=>{
             "hour" : hour,
             "amPm" : amPm,
             "minutes" : minutes,
-            "seconds" : seconds,
             "status":"",
+            "timing":datetime
         };
         tasks.push(taskObj);
         taskCount = tasks.length - 1;
@@ -175,7 +187,7 @@ taskBtn.addEventListener("click",()=>{
         addEventListenerToDeleteBtn(document.querySelector(`#delete-btn${taskCount}`));
         localStorage.setItem("tasks",JSON.stringify(tasks));
         console.log(datetime - new Date());
-        createNotification(datetime,taskObj.task);
+        createNotification(taskObj);
     }
 });
 
@@ -199,6 +211,10 @@ function initialization(){
         tasks = JSON.parse(tasks);
         renderTasks(tasks);
         addEventListenersToElements(tasks.length - 1,true);
+        for(let task of tasks){
+            // console.log(typeof task['timing'], task['task']);
+            createNotification(task);
+        }
     }
     else{
     tasks = [];
