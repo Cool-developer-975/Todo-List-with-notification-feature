@@ -26,11 +26,13 @@ function createNotification(task){
             else{
                 alert("Cannot create notifications since the notification permission is denied, to get notifications please grant notification permission.")
             }
+            return true;
         }
         else{
             alert("Cannot create notification, please select a date closer to current date");
         }
     }
+    return false;
 }
 
 function returnTasksString(i,taskArray){
@@ -180,14 +182,17 @@ taskBtn.addEventListener("click",()=>{
             "status":"",
             "timing":datetime
         };
-        tasks.push(taskObj);
-        taskCount = tasks.length - 1;
-        renderTask(taskCount,tasks);
-        addEventListenerToDoneBtn(document.querySelector(`#done-btn${taskCount}`));
-        addEventListenerToDeleteBtn(document.querySelector(`#delete-btn${taskCount}`));
-        localStorage.setItem("tasks",JSON.stringify(tasks));
-        console.log(datetime - new Date());
-        createNotification(taskObj);
+        if(createNotification(taskObj)){
+
+            tasks.push(taskObj);
+            taskCount = tasks.length - 1;
+            renderTask(taskCount,tasks);
+            addEventListenerToDoneBtn(document.querySelector(`#done-btn${taskCount}`));
+            addEventListenerToDeleteBtn(document.querySelector(`#delete-btn${taskCount}`));
+            localStorage.setItem("tasks",JSON.stringify(tasks));
+            console.log(datetime - new Date());
+            
+        }
     }
 });
 
@@ -212,7 +217,6 @@ function initialization(){
         renderTasks(tasks);
         addEventListenersToElements(tasks.length - 1,true);
         for(let task of tasks){
-            // console.log(typeof task['timing'], task['task']);
             createNotification(task);
         }
     }
