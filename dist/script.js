@@ -225,7 +225,7 @@ function initialization(){
     }
 
     const utcDate = new Date();
-    utcDate.setUTCHours(utcDate.getUTCHours() + 5.5, utcDate.getUTCMinutes(), 0, 0); // Ensure 0 seconds and milliseconds for consistency
+    utcDate.setUTCHours(utcDate.getUTCHours() + 5.5, utcDate.getUTCMinutes()+30, 0, 0); // Ensure 0 seconds and milliseconds for consistency
     dateTimeInput.min = utcDate.toISOString().slice(0, 16);
     dateTimeInput.value = utcDate.toISOString().slice(0, 16);
 }
